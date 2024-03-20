@@ -10,10 +10,10 @@ import plotly.express as px
 
 # Charger les données JSON depuis des fichiers locaux
 events_files = {
-    'France vs Croatie CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/8658.json',
-    'Croatie vs Ruusie CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/8652.json',
-    'Belgique vs France CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/8655.json',
-    'Belgique vs Angleterre CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/8657.json'
+    'France vs Croatie CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8658.json',
+    'Croatie vs Ruusie CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8652.json',
+    'Belgique vs France CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8655.json',
+    'Belgique vs Angleterre CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8657.json'
     # Ajouter d'autres jeux de données ici avec leur nom de match correspondant
 }
 
@@ -205,7 +205,7 @@ import pandas as pd
 import plotly.express as px
 
 # Charger les données JSON
-with open('/Users/moussamar/Desktop/statsbomb_test/competitions.json', 'r') as file:
+with open('/Users/moussamar/Desktop/statsbomb_test/data/competitions.json', 'r') as file:
     competition_data = json.load(file)
 
 # Convertir les données en DataFrame pandas
