@@ -7,6 +7,8 @@ import numpy as np
 from mplsoccer import Radar, FontManager, Pitch
 import seaborn as sns
 import plotly.express as px
+import plotly.graph_objects as go
+
 
 # Charger les données JSON depuis des fichiers locaux
 events_files = {
@@ -28,6 +30,9 @@ df = json_normalize(events, sep="_")
 
 # Définir le titre de l'application Streamlit
 st.title('GameStats ⚽️🏟️')
+
+# Ajout de la séparation
+st.markdown("---")
 
 # Heatmap des passes
 st.subheader('Heatmap des passes')
@@ -109,7 +114,8 @@ fig = px.scatter(df, x='location', y='pass_aerial_won', color='team_name', hover
 # Afficher le nuage de points interactif
 st.plotly_chart(fig)
 
-###############
+##############
+
 # Ajout de la séparation
 st.markdown("---")
 
@@ -129,7 +135,7 @@ fig, ax = plt.subplots(figsize=(10, 6))
 possession_data.plot(ax=ax)
 ax.set_xlabel('Minute')
 ax.set_ylabel('Possession de balle')
-ax.set_title('Évolution de la possession de balle')
+#ax.set_title('Évolution de la possession de balle')
 ax.legend(title='Équipe')
 
 # Afficher le graphique dans Streamlit
@@ -170,6 +176,9 @@ for team in df_actions_by_team.index:
 
 
 ###############
+# Ajout de la séparation
+st.markdown("---")
+
 st.title('Répartition des actions par équipe')
 
 # Sélectionner une équipe
@@ -249,4 +258,3 @@ st.markdown(
 )
 
 ########################
-
