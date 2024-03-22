@@ -7,25 +7,36 @@ import numpy as np
 from mplsoccer import Radar, FontManager, Pitch
 import seaborn as sns
 import plotly.express as px
+import pymongo
+from pymongo import MongoClient
 
 # Charger les données JSON depuis des fichiers locaux
-events_files = {
-    'France vs Croatie CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8658.json',
-    'Croatie vs Ruusie CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8652.json',
-    'Belgique vs France CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8655.json',
-    'Belgique vs Angleterre CDM 2018': '/Users/moussamar/Desktop/statsbomb_test/data/8657.json'
-    # Ajouter d'autres jeux de données ici avec leur nom de match correspondant
-}
+# events_files = {
+#     'France vs Croatie CDM 2018': 'data/8658.json',
+#     'Croatie vs Ruusie CDM 2018': 'data/8652.json',
+#     'Belgique vs France CDM 2018': 'data/8655.json',
+#     'Belgique vs Angleterre CDM 2018': 'data/8657.json'
+#     # Ajouter d'autres jeux de données ici avec leur nom de match correspondant
+# }
+
+# Connexion à la base de données MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["GameStats"]
+
+# Liste des noms de collections
+events_files = ["15946", "8652", "8655", "8657", "8655",  "8658",  "competitions"]
+
+
 
 # Sidebar pour la sélection des matchs
-selected_match = st.sidebar.selectbox('Sélectionnez un match :', list(events_files.keys()))
+selected_match = st.sidebar.selectbox('Sélectionnez un match :', events_files)
 
 # Charger les données JSON du match sélectionné
 with open(events_files[selected_match], 'r') as file:
     events = json.load(file)
 # Transformer JSON en DataFrame
 df = json_normalize(events, sep="_")
-
+st.title("Analyse des statistique")
 # Définir le titre de l'application Streamlit
 st.title('GameStats ⚽️🏟️')
 
@@ -205,7 +216,7 @@ import pandas as pd
 import plotly.express as px
 
 # Charger les données JSON
-with open('/Users/moussamar/Desktop/statsbomb_test/data/competitions.json', 'r') as file:
+with open('data/competitions.json', 'r') as file:
     competition_data = json.load(file)
 
 # Convertir les données en DataFrame pandas

@@ -1,0 +1,16 @@
+# Ignorer les fichiers de l'environnement virtuel
+venv/
+env/
+.venv/
+myenv/
+*~
+# exclure ces dossiers et fichiers spécifiques
+*/tests/*
+*/setup.*
+*.egg-info
+*.dist-info
+
+
+# Ignorer les fichiers de cache et de compilation Python
+*.pyc
+__pycache__/
