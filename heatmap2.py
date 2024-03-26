@@ -52,18 +52,18 @@ st.title('GameStats ⚽️🏟️')
 ######################################
 
 # Connexion à la base de données MongoDB
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client["gs"]
-events_collection = db["events"]
-competitions_collection = db["competitions"]
+#client = pymongo.MongoClient("mongodb://localhost:27017/")
+#db = client["gs"]
+#events_collection = db["events"]
+#competitions_collection = db["competitions"]
 
 # Charger les données depuis la collection events
-events_data = list(events_collection.find())
-df_events = pd.DataFrame(events_data)
+#events_data = list(events_collection.find())
+#df_events = pd.DataFrame(events_data)
 
 # Charger les données depuis la collection competitions
-competitions_data = list(competitions_collection.find())
-df_competitions = pd.DataFrame(competitions_data)
+#competitions_data = list(competitions_collection.find())
+#df_competitions = pd.DataFrame(competitions_data)
 
 
 ##########@
