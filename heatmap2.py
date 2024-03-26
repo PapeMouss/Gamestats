@@ -10,15 +10,20 @@ import plotly.express as px
 import plotly.graph_objects as go
 from urllib.request import urlopen
 from PIL import Image
+from statsbombpy import sb
+import pymongo
 
-#from mplsoccer import Sbapi
+#from mplsoccer import Sbapi        #api for getting data from StatsBomb
 
+#font 
 font_normal = FontManager('https://raw.githubusercontent.com/googlefonts/roboto/main/'
                           'src/hinted/Roboto-Regular.ttf')
 font_italic = FontManager('https://raw.githubusercontent.com/googlefonts/roboto/main/'
                           'src/hinted/Roboto-Italic.ttf')
 font_bold = FontManager('https://raw.githubusercontent.com/google/fonts/main/apache/robotoslab/'
                         'RobotoSlab[wght].ttf')
+
+############
 
 # Chargement des données JSON depuis des fichiers locaux
 events_files = {
@@ -32,14 +37,37 @@ events_files = {
 # Sidebar pour la sélection des matchs
 selected_match = st.sidebar.selectbox('Sélectionnez un match :', list(events_files.keys()))
 
+#######@
+
 # Chargement des données JSON du match sélectionné
 with open(events_files[selected_match], 'r') as file:
     events = json.load(file)
 # Transformation JSON en DataFrame
 df = json_normalize(events, sep="_")
 
+#######
+
 # titre de l'application Streamlit
 st.title('GameStats ⚽️🏟️')
+
+######################################
+
+# Connexion à la base de données MongoDB
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+db = client["gs"]
+events_collection = db["events"]
+competitions_collection = db["competitions"]
+
+# Charger les données depuis la collection events
+events_data = list(events_collection.find())
+df_events = pd.DataFrame(events_data)
+
+# Charger les données depuis la collection competitions
+competitions_data = list(competitions_collection.find())
+df_competitions = pd.DataFrame(competitions_data)
+
+
+##########@
 
 # Ajout de la séparation
 st.markdown("---")
@@ -60,7 +88,6 @@ with st.sidebar:
     # Ajouter des liens vers les réseaux sociaux ou d'autres plateformes
     st.markdown("### Suivez-nous sur les réseaux sociaux :")
     st.markdown("[Twitter](https://twitter.com/GameStats) | [Instagram](https://instagram.com/GameStats) | [Facebook](https://facebook.com/GameStats)")
-
 
 
 # Filtre des passes faites par l'équipe sélectionnée
@@ -184,24 +211,8 @@ st.pyplot(fig)
 
 
 ###############
-# Ajout de la séparation
-st.markdown("---")
 
-# Deuxième visualisation avec tactics_lineup
-st.title('Relation entre les passes et tactics_lineup')
-
-# Bouton pour visualiser les données avec la variable tactics_lineup
-if st.button("Visualiser avec tactics_lineup"):
-    # Création de la visualisation avec tactics_lineup
-    fig2 = px.scatter(df, x='tactics_lineup', y=y_variable, color='team_name', hover_name='player_name',
-                      title='Relation entre les passes et tactics_lineup',
-                      labels={'tactics_lineup': 'Alignement tactique', y_variable: 'Nombre de tirs'})
-    # Afficher la visualisation
-    st.plotly_chart(fig2)
-
-##########@
-
-############@
+#############
 
 # Ajout de la séparation
 st.markdown("---")
@@ -301,9 +312,8 @@ fig.update_geos(projection_type="orthographic", showcoastlines=True, showland=Tr
 # Affichage la carte dans Streamlit
 st.plotly_chart(fig)
 #####################
+####################
 
-
-#####################
 
 # Ajout séparation
 st.markdown("---")
