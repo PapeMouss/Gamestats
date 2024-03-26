@@ -10,7 +10,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from urllib.request import urlopen
 from PIL import Image
-from statsbombpy import sb
 import pymongo
 
 #from mplsoccer import Sbapi        #api for getting data from StatsBomb
