@@ -35,10 +35,10 @@ font_bold = FontManager('https://raw.githubusercontent.com/google/fonts/main/apa
     # d'autres jeux de données ici avec leur nom de match correspondant
 #}
 
-# Chemin absolu du répertoire contenant les fichiers JSON
-data_directory = '/Users/moussamar/Desktop/statsbomb_test/data'  # Modifier en fonction de votre chemin absolu
+# Chemin relatif du répertoire contenant les fichiers JSON
+data_directory = 'data'
 
-# Construction des chemins absolus des fichiers JSON
+# Construction des chemins relatifs des fichiers JSON
 events_files = {
     'France vs Croatie CDM 2018': os.path.join(data_directory, '8658.json'),
     'Croatie vs Ruusie CDM 2018': os.path.join(data_directory, '8652.json'),
@@ -47,18 +47,18 @@ events_files = {
     # Ajouter d'autres jeux de données ici avec leur nom de match correspondant
 }
 
-
 # Sidebar pour la sélection des matchs
 selected_match = st.sidebar.selectbox('Sélectionnez un match :', list(events_files.keys()))
 
-# Chargement des données JSON du match sélectionné
-with open(events_files[selected_match], 'r') as file:
+# Chemin absolu du répertoire contenant le script Python
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Chargement des données JSON du match sélectionné en utilisant un chemin relatif
+with open(os.path.join(script_directory, events_files[selected_match]), 'r') as file:
     events = json.load(file)
 
 # Transformation JSON en DataFrame
 df = json_normalize(events, sep="_")
-
-
 
 
 
