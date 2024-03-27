@@ -313,8 +313,14 @@ import json
 import pandas as pd
 import plotly.express as px
 
-# Chargement les données JSON
-with open('/Users/moussamar/Desktop/statsbomb_test/data/competitions.json', 'r') as file:
+# Chemin relatif du répertoire contenant les données JSON
+data_directory = 'data'
+
+# Construction du chemin relatif du fichier JSON des compétitions
+json_file_path = os.path.join(data_directory, 'competitions.json')
+
+# Chargement des données JSON
+with open(json_file_path, 'r') as file:
     competition_data = json.load(file)
 
 # Convertissons des données en DataFrame pandas
