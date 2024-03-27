@@ -61,8 +61,6 @@ with open(os.path.join(script_directory, events_files[selected_match]), 'r') as 
 df = json_normalize(events, sep="_")
 
 
-
-
 # Sidebar pour la sélection des matchs
 #selected_match = st.sidebar.selectbox('Sélectionnez un match :', list(events_files.keys()))
 
@@ -106,14 +104,17 @@ st.subheader('Heatmap des passes')
 
 # Sidebar pour la sélection des matchs et éléments décoratifs
 with st.sidebar:
+    # Chemin relatif de l'image décorative
+    image_path = "l4.jpg"
     # Logo ou image décorative
-    st.image("/Users/moussamar/Desktop/statsbomb_test/l4.jpg",use_column_width=True, width=200)
+    st.image(image_path, use_column_width=True, width=200)
     # Titre décoratif
     st.markdown("<h1 style='text-align: center;'>GameStats</h1>", unsafe_allow_html=True)
     #  un texte ou une phrase inspirante
     st.markdown("> *Analysez les statistiques des matchs de football et tirez des insights intéressants.*")
-    # vidéo d'introduction ou une animation
-    st.video("/Users/moussamar/Desktop/statsbomb_test/vidéoo.mp4")
+    # Chemin relatif de la vidéo d'introduction ou une animation
+    video_path = "vidéoo.mp4"
+    st.video(video_path)
     #  des liens vers les réseaux sociaux ou d'autres plateformes
     st.markdown("### Suivez-nous sur les réseaux sociaux :")
     st.markdown("[Twitter](https://twitter.com/GameStats) | [Instagram](https://instagram.com/GameStats) | [Facebook](https://facebook.com/GameStats)")
