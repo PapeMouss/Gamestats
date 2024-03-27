@@ -80,11 +80,11 @@ with st.sidebar:
     st.image("/Users/moussamar/Desktop/statsbomb_test/l4.jpg",use_column_width=True, width=200)
     # Titre décoratif
     st.markdown("<h1 style='text-align: center;'>GameStats</h1>", unsafe_allow_html=True)
-    # Ajouter un texte ou une phrase inspirante
+    #  un texte ou une phrase inspirante
     st.markdown("> *Analysez les statistiques des matchs de football et tirez des insights intéressants.*")
-    # Ajouter une vidéo d'introduction ou une animation
-    st.video("https://example.com/your-intro-video.mp4")
-    # Ajouter des liens vers les réseaux sociaux ou d'autres plateformes
+    # vidéo d'introduction ou une animation
+    st.video("/Users/moussamar/Desktop/statsbomb_test/vidéoo.mp4")
+    #  des liens vers les réseaux sociaux ou d'autres plateformes
     st.markdown("### Suivez-nous sur les réseaux sociaux :")
     st.markdown("[Twitter](https://twitter.com/GameStats) | [Instagram](https://instagram.com/GameStats) | [Facebook](https://facebook.com/GameStats)")
 
@@ -226,7 +226,7 @@ df_actions_by_team = df.groupby(['team_name', 'type_name']).size().unstack(fill_
 for team in df_actions_by_team.index:
     team_data = df_actions_by_team.loc[[team]]
     fig, ax = plt.subplots(figsize=(12, 8))
-    bar_width = 0.35  # Largeur des barres
+    bar_width = 0.25  # Largeur des barres
     index = np.arange(len(team_data))  # Position des types d'action sur l'axe x
 
     # Plot pour chaque type d'action
